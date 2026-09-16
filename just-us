@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>our little thoughtbook ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+:root{
+  --lav:#d9c7ff; --lav2:#a992d8; --ink:#211d2c; --paper:#fffaff;
+  --muted:#766f83; --line:#eadff3; --pink:#f5d8e8;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+  background:
+    radial-gradient(circle at 12% 15%, #f7dff0 0 2px, transparent 3px),
+    radial-gradient(circle at 84% 20%, #d9c7ff 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 65% 75%, #eadcff 0 2px, transparent 3px),
+    linear-gradient(135deg,#f9eff8,#eee8ff 48%,#f7f1fa);
+  background-size:120px 120px,170px 170px,210px 210px,100% 100%;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;
+  background-image:linear-gradient(transparent 95%,rgba(80,60,100,.08) 96%);
+  background-size:100% 6px;
+}
+.wrap{width:min(1120px,92%);margin:auto;padding:30px 0 60px}
+header{
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:18px 4px 28px;
+}
+.logo{font-family:"Cormorant Garamond",serif;font-size:34px;font-weight:700}
+.logo span{color:#a27cc9}
+.tag{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.hero{
+  display:grid;grid-template-columns:1.35fr .65fr;gap:20px;
+}
+.card{
+  background:rgba(255,250,255,.76);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.9);box-shadow:0 18px 50px rgba(87,67,110,.12);
+  border-radius:28px;
+}
+.intro{padding:38px}
+.intro h1{
+  font-family:"Cormorant Garamond",serif;font-size:58px;line-height:.92;margin:0 0 14px;
+}
+.intro h1 em{color:#a27cc9;font-style:normal}
+.intro p{color:var(--muted);line-height:1.7;max-width:620px}
+.names{display:flex;align-items:center;gap:10px;margin-top:24px}
+input,textarea,select{
+  width:100%;border:1px solid var(--line);background:#fffdfd;color:var(--ink);
+  border-radius:15px;padding:13px 14px;font:inherit;outline:none;
+}
+input:focus,textarea:focus,select:focus{border-color:#bca6e4;box-shadow:0 0 0 3px #eadfff}
+.names input{max-width:210px}
+.heart{color:#b47eb7;font-size:20px}
+.doll{
+  min-height:310px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,rgba(222,210,255,.72),rgba(255,239,247,.72));
+}
+.doll:after{content:"SNOWY • STELLA ";position:absolute;bottom:17px;left:0;right:0;text-align:center;letter-spacing:3px;font-size:10px;color:#71637f}
+.doll-art{position:relative;width:190px;height:235px}
+.halo{position:absolute;width:170px;height:170px;border:1px solid #b9a4dd;border-radius:50%;left:10px;top:5px;box-shadow:0 0 40px #d9c7ff}
+.head{position:absolute;width:82px;height:94px;background:#f8e6e4;border-radius:44% 44% 48% 48%;left:54px;top:34px;border:2px solid #4d4058}
+.hair{position:absolute;width:112px;height:122px;left:39px;top:22px;border-radius:50% 50% 42% 42%;border:5px solid #4d4058}
+.eye{position:absolute;width:8px;height:12px;border-radius:50%;background:#4d4058;top:75px}
+.e1{left:77px}.e2{left:108px}
+.ribbon{position:absolute;left:48px;top:116px;width:94px;height:12px;background:#c7b0eb;border:2px solid #4d4058}
+.body{position:absolute;left:52px;top:125px;width:86px;height:82px;background:#efe4ff;border:3px solid #4d4058;border-radius:24px 24px 12px 12px}
+.book{position:absolute;left:75px;top:165px;width:45px;height:30px;background:#fff;border:2px solid #4d4058;transform:rotate(-8deg)}
+.tabs{display:flex;gap:10px;margin:26px 0 15px}
+.tab{border:0;background:rgba(255,255,255,.65);padding:11px 17px;border-radius:999px;cursor:pointer;font:inherit;color:var(--muted)}
+.tab.active{background:#cdb8ed;color:#2a2332}
+.panel{display:none}.panel.active{display:block}
+.write{padding:24px}
+.row{display:grid;grid-template-columns:1fr 180px;gap:12px}
+textarea{min-height:150px;resize:vertical}
+.btn{
+  border:0;background:#3a3044;color:white;border-radius:15px;padding:13px 18px;
+  cursor:pointer;font:600 14px "DM Sans";margin-top:12px
+}
+.btn.secondary{background:#eadff3;color:#44394e}
+.entry{
+  padding:20px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.65);
+  margin-top:14px;position:relative
+}
+.entry .date{font-size:11px;color:var(--muted);letter-spacing:1px}
+.entry .mood{float:right;font-size:18px}
+.entry p{font-family:"Cormorant Garamond",serif;font-size:23px;line-height:1.3;margin:12px 0 3px}
+.delete{position:absolute;right:16px;bottom:13px;border:0;background:transparent;color:#a28da9;cursor:pointer}
+.empty{text-align:center;color:var(--muted);padding:35px}
+footer{text-align:center;color:#8c8195;font-size:12px;margin-top:24px}
+@media(max-width:760px){
+  .hero{grid-template-columns:1fr}.intro h1{font-size:46px}.row{grid-template-columns:1fr}.names{flex-wrap:wrap}.names input{max-width:none}.doll{min-height:250px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">our little <span>thoughtbook</span> ♡</div>
+  <div class="tag">private little universe</div>
+</header>
+
+<section class="hero">
+  <div class="card intro">
+    <div class="tag">two minds · one tiny corner</div>
+    <h1>things we<br><em>never want to forget.</em></h1>
+    <p>Random thoughts, midnight ideas, silly moments, tiny wins and everything in between. Write it down here and let your little archive grow.</p>
+    <div class="names">
+      <input id="name1" placeholder="your name" />
+      <span class="heart">♡</span>
+      <input id="name2" placeholder="her name" />
+    </div>
+  </div>
+  <div class="card doll" aria-label="dollcore inspired illustration">
+    <div class="doll-art">
+      <div class="halo"></div><div class="hair"></div><div class="head"></div>
+      <div class="eye e1"></div><div class="eye e2"></div><div class="ribbon"></div>
+      <div class="body"></div><div class="book"></div>
+    </div>
+  </div>
+</section>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('write',this)">✦ write</button>
+  <button class="tab" onclick="showTab('memories',this)">♡ our thoughts</button>
+  <button class="tab" onclick="showTab('about',this)">☾ little rules</button>
+</div>
+
+<section id="write" class="panel active card write">
+  <div class="tag">new thought</div>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;margin:7px 0 18px">what's on your mind?</h2>
+  <div class="row">
+    <textarea id="thought" placeholder="write literally anything... a random thought, a rant, a dream, a joke, a memory ♡"></textarea>
+    <div>
+      <select id="mood">
+        <option>☁️ dreamy</option><option>🌙 sleepy</option><option>🌷 soft</option>
+        <option>🫧 silly</option><option>✨ happy</option><option>🍓 chaotic</option>
+        <option>🕯️ thoughtful</option><option>💌 lovey</option>
+      </select>
+      <button class="btn" onclick="saveThought()">save this ♡</button>
+      <button class="btn secondary" onclick="randomPrompt()">give me a prompt</button>
+      <p id="prompt" style="font-family:'Cormorant Garamond',serif;font-size:19px;color:#786d80;line-height:1.4"></p>
+    </div>
+  </div>
+</section>
+
+<section id="memories" class="panel">
+  <div class="card write">
+    <div class="tag">the archive</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;margin:7px 0">our tiny universe</h2>
+    <div id="entries"></div>
+  </div>
+</section>
+
+<section id="about" class="panel card write">
+  <div class="tag">little rules</div>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;margin:7px 0">for this tiny corner ☾</h2>
+  <p>♡ no thought is too random.</p>
+  <p>♡ no judging the weird ones.</p>
+  <p>♡ write like nobody else is reading.</p>
+  <p>♡ keep the sweet memories here too.</p>
+  <p style="color:#887b91">Your entries are stored only in this browser using local storage. There is no server or account in this simple version.</p>
+</section>
+
+<footer>made for two people and approximately 837 random thoughts ♡</footer>
+</div>
+
+<script>
+const KEY='littleThoughtbookEntries';
+const N1='littleThoughtbookName1', N2='littleThoughtbookName2';
+
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.getElementById(id).classList.add('active'); btn.classList.add('active');
+  if(id==='memories') render();
+}
+function saveNames(){
+  localStorage.setItem(N1,document.getElementById('name1').value);
+  localStorage.setItem(N2,document.getElementById('name2').value);
+}
+function saveThought(){
+  const text=document.getElementById('thought').value.trim();
+  if(!text){document.getElementById('thought').focus();return}
+  const entries=JSON.parse(localStorage.getItem(KEY)||'[]');
+  entries.unshift({text,mood:document.getElementById('mood').value,date:new Date().toLocaleString([],{
+    day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'
+  })});
+  localStorage.setItem(KEY,JSON.stringify(entries));
+  document.getElementById('thought').value='';
+  document.getElementById('prompt').textContent='saved to your little universe ♡';
+  render();
+}
+function deleteThought(i){
+  const entries=JSON.parse(localStorage.getItem(KEY)||'[]');
+  entries.splice(i,1); localStorage.setItem(KEY,JSON.stringify(entries)); render();
+}
+function render(){
+  const box=document.getElementById('entries');
+  const entries=JSON.parse(localStorage.getItem(KEY)||'[]');
+  if(!entries.length){box.innerHTML='<div class="empty">nothing here yet... write your first tiny thought ♡</div>';return}
+  box.innerHTML=entries.map((e,i)=>`
+    <article class="entry"><span class="mood">${e.mood.split(' ')[0]}</span>
+      <div class="date">${e.date}</div>
+      <p>${escapeHtml(e.text)}</p>
+      <button class="delete" onclick="deleteThought(${i})">remove</button>
+    </article>`).join('');
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+const prompts=[
+"What is something tiny that made you smile today?",
+"If today were a colour, what would it be?",
+"Write one completely unfiltered thought.",
+"What do you hope we remember about this year?",
+"Describe your current mood without naming the emotion.",
+"What random thing are you obsessed with right now?",
+"Write a message to your future selves.",
+"What is a silly thing only the two of you understand?"
+];
+function randomPrompt(){document.getElementById('prompt').textContent=prompts[Math.floor(Math.random()*prompts.length)]}
+document.getElementById('name1').value=localStorage.getItem(N1)||'';
+document.getElementById('name2').value=localStorage.getItem(N2)||'';
+document.getElementById('name1').addEventListener('input',saveNames);
+document.getElementById('name2').addEventListener('input',saveNames);
+render();
+</script>
+</body>
+</html>
